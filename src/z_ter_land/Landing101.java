@@ -44,10 +44,11 @@ public void show(int index) {
         jLabel3 = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
         next = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         back = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         bg_label = new javax.swing.JLabel();
 
@@ -71,6 +72,12 @@ public void show(int index) {
         });
         getContentPane().add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Book", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText(" LOGIN");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 78, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 100, 30));
+
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrowhead.png"))); // NOI18N
         back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -86,12 +93,6 @@ public void show(int index) {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 25, 25), 1, true));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.BorderLayout());
-
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Book", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText(" LOGIN");
-        jPanel1.add(jLabel2, java.awt.BorderLayout.CENTER);
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 80, 30));
 
         jScrollPane2.setBackground(new java.awt.Color(0, 0, 0));
@@ -193,6 +194,7 @@ public void show(int index) {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label;
     private javax.swing.JLabel next;

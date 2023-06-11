@@ -16,6 +16,10 @@ public class Profile extends javax.swing.JFrame {
     public Profile() {
         initComponents();
     }
+    
+
+   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,13 +35,17 @@ public class Profile extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        Ticketssold = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        Movieavailable = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        Totalincome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,13 +74,19 @@ public class Profile extends javax.swing.JFrame {
         jLabel5.setText("Tickets sold");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, -1, -1));
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/income frame.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("200");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, 40, 50));
+
+        Ticketssold.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        Ticketssold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/income frame.png"))); // NOI18N
+        Ticketssold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                TicketssoldActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 250, 70));
+        jPanel1.add(Ticketssold, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 250, 70));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,39 +99,63 @@ public class Profile extends javax.swing.JFrame {
         jLabel4.setText("Total Income");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/income frame.png"))); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("12000");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+
+        Movieavailable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/income frame.png"))); // NOI18N
+        Movieavailable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                MovieavailableActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 250, 70));
+        jPanel1.add(Movieavailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 250, 70));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/income frame.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("12000");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
+
+        Totalincome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/income frame.png"))); // NOI18N
+        Totalincome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TotalincomeActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 250, 70));
+        jPanel1.add(Totalincome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 250, 70));
 
+        jTable1.setBackground(new java.awt.Color(46, 74, 81));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {"021", "Your Name", "2023-02-19", "7:00", "250"},
+                {"201", "Kill Bill", "2023-03-12", "2:50", "340"},
+                {"200", "Doctor Strange", "2023-01-5", "3:00", "200"},
+                {"201", "The hand Madian ", "2023-02-13", "2:30", "300"},
+                {"230", "heather", "2023-03-13", "4:00", "550"},
+                {"235", "Ann with the E", "2023-05-12", "5:00", "200"}
             },
             new String [] {
                 "Ticket no", "Movie", "Date", "Show", "Fare"
             }
         ));
+        jTable1.setSelectionBackground(new java.awt.Color(46, 74, 81));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 500, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 620, 150));
 
+        jButton5.setText("Overview profit");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/Desktop - 14.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1120, 750));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,17 +180,21 @@ public class Profile extends javax.swing.JFrame {
         db.setVisible(true);
     }//GEN-LAST:event_BackActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void MovieavailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MovieavailableActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_MovieavailableActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void TicketssoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TicketssoldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_TicketssoldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void TotalincomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TotalincomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_TotalincomeActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,15 +233,19 @@ public class Profile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Movieavailable;
+    private javax.swing.JButton Ticketssold;
+    private javax.swing.JButton Totalincome;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

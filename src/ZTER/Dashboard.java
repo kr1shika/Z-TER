@@ -8,7 +8,10 @@ package ZTER;
  *
  * @author haseena
  */
+//import javax.swing.JLabel;
 public class Dashboard extends javax.swing.JFrame {
+
+    private Object contentPane;
 
     /**
      * Creates new form Dashboard
@@ -16,6 +19,7 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +52,7 @@ public class Dashboard extends javax.swing.JFrame {
         Availablemovie_btn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(214783647, 2147483647));
         setName("Main frame"); // NOI18N
 
         frstpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,6 +73,12 @@ public class Dashboard extends javax.swing.JFrame {
         frstpanel.add(Profile_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, 40, 40));
 
         fstMovie_btn.setIcon(new javax.swing.ImageIcon("/home/haseena/Downloads/movie ticketing/tarMOviename.png")); // NOI18N
+        fstMovie_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fstMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                fstMovie_btnMouseEntered(evt);
+            }
+        });
         fstMovie_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fstMovie_btnActionPerformed(evt);
@@ -176,7 +187,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_Profile_btnActionPerformed
 
     private void fstMovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fstMovie_btnActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_fstMovie_btnActionPerformed
 
     private void SecMovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SecMovie_btnActionPerformed
@@ -210,6 +221,10 @@ public class Dashboard extends javax.swing.JFrame {
         Customer cust = new Customer();
         cust.setVisible(true);
     }//GEN-LAST:event_customer_btnActionPerformed
+
+    private void fstMovie_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fstMovie_btnMouseEntered
+
+    }//GEN-LAST:event_fstMovie_btnMouseEntered
 
     /**
      * @param args the command line arguments

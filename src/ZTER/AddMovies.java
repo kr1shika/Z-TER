@@ -243,7 +243,7 @@ public class AddMovies extends javax.swing.JFrame {
 } catch (SQLException e) {
     System.out.println("Error executing SQL: " + e.getMessage());
 } finally {
-    // Close the statement and connection in the finally block to ensure proper resource cleanup
+
     try {
         if (stmt != null)
             stmt.close();
@@ -272,30 +272,29 @@ public class AddMovies extends javax.swing.JFrame {
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Select an image file");
     
-    // Show the file chooser dialog
+
     int result = fileChooser.showOpenDialog(this);
     
-    // Check if a file was selected
+
     if (result == JFileChooser.APPROVE_OPTION) {
         File selectedFile = fileChooser.getSelectedFile();
         
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk")) {
-            // Read the image file into a byte array
+
             byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
             
-            // Prepare the SQL statement
+
             String sql = "INSERT INTO image (image) VALUES (?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            
-            // Set the image byte array as a parameter
+
             statement.setBytes(1, imageBytes);
             
-            // Execute the SQL statement
+
             statement.executeUpdate();
             
             System.out.println("Image imported and stored in the database successfully.");
             
-            // Display the image in the label
+
             ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
             lblimg.setIcon(imageIcon);
         } catch (IOException | SQLException e) {
@@ -321,42 +320,7 @@ public class AddMovies extends javax.swing.JFrame {
     private void btnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewActionPerformed
         // TODO add your handling code here:
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "username", "password")) {
-            String sql = "SELECT * FROM movie";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            // Get the metadata of the result set to retrieve column names
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-
-            // Create a DefaultTableModel to hold the table data
-            DefaultTableModel model = new DefaultTableModel();
-
-            // Set the column names for the model
-            for (int i = 1; i <= columnCount; i++) {
-                model.addColumn(metaData.getColumnName(i));
-            }
-
-            // Populate the model with the query result data
-            while (resultSet.next()) {
-                Object[] rowData = new Object[columnCount];
-                for (int i = 1; i <= columnCount; i++) {
-                    rowData[i - 1] = resultSet.getObject(i);
-                }
-                model.addRow(rowData);
-            }
-
-            // Set the model for the JTable component
-            tblmoviecollection.setModel(model);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Other methods and code
-
-}
+        
 
     }//GEN-LAST:event_btnviewActionPerformed
 

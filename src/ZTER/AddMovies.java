@@ -8,7 +8,23 @@ package ZTER;
  *
  * @author haseena
  */
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class AddMovies extends javax.swing.JFrame {
+    Connection conn = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    DefaultTableModel dtm = null;
 
     /**
      * Creates new form AddMovies
@@ -26,21 +42,198 @@ public class AddMovies extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblMovieTitle = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        txtMovieTitle = new javax.swing.JTextField();
+        lblGenre = new javax.swing.JLabel();
+        txtgenre = new javax.swing.JTextField();
+        lblDuration = new javax.swing.JLabel();
+        txtDuration = new javax.swing.JTextField();
+        txtPublishDate = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        btnInsert = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblmoviecollection = new javax.swing.JTable();
+        lblimg = new javax.swing.JLabel();
+        img_import = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblMovieTitle.setText("MovieTitle");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("MovieTitle  | varchar(100) | YES  |     | NULL    |       |\n| Genre       | varchar(100) | YES  |     | NULL    |       |\n| Duration    | varchar(100) | YES  |     | NULL    |       |\n| image       | varchar(60)  | YES  |     | NULL    |       |\n| PublishDate");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        lblGenre.setText("Genre");
+
+        lblDuration.setText("Duration");
+
+        txtDuration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDurationActionPerformed(evt);
+            }
+        });
+
+        txtPublishDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPublishDateActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("PublishDate");
+
+        btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+
+        tblmoviecollection.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "MovieTitle", "Genre", "Duration", "publishdate"
+            }
+        ));
+        jScrollPane2.setViewportView(tblmoviecollection);
+
+        img_import.setText("Import");
+        img_import.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                img_importActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnInsert)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblDuration)
+                                        .addComponent(jLabel4)))
+                                .addGap(88, 88, 88)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtPublishDate, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblGenre)
+                                    .addGap(125, 125, 125)
+                                    .addComponent(txtgenre, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblMovieTitle)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtMovieTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(lblimg, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(img_import)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblimg, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(img_import)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMovieTitle)
+                            .addComponent(txtMovieTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblGenre)
+                            .addComponent(txtgenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDuration)
+                            .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addComponent(btnInsert)
+                                .addGap(44, 44, 44))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtPublishDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        try {
+    conn = database.dbConn();
+    stmt = conn.createStatement();
+    String sql = "INSERT INTO movietable (MovieTitle,Genre,Duration,PublishDate) VALUES ('" + txtMovieTitle.getText() + "','" + txtgenre.getText() + "','"+txtDuration.getText()+"','"+txtPublishDate.getText()+"')";
+    stmt.executeUpdate(sql);
+    System.out.println("Data inserted");
+    JOptionPane.showMessageDialog(this, "Message registered", "Teacher", JOptionPane.INFORMATION_MESSAGE);
+} catch (SQLException e) {
+    System.out.println("Error executing SQL: " + e.getMessage());
+} finally {
+    // Close the statement and connection in the finally block to ensure proper resource cleanup
+    try {
+        if (stmt != null)
+            stmt.close();
+    } catch (SQLException e) {
+        System.out.println("Error closing statement: " + e.getMessage());
+    }
+    try {
+        if (conn != null)
+            conn.close();
+    } catch (SQLException e) {
+        System.out.println("Error closing connection: " + e.getMessage());
+    }
+}
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void txtPublishDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPublishDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPublishDateActionPerformed
+
+    private void txtDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDurationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDurationActionPerformed
+
+    private void img_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_img_importActionPerformed
+
+    
+
+    }//GEN-LAST:event_img_importActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +271,20 @@ public class AddMovies extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInsert;
+    private javax.swing.JButton img_import;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblDuration;
+    private javax.swing.JLabel lblGenre;
+    private javax.swing.JLabel lblMovieTitle;
+    private javax.swing.JLabel lblimg;
+    private javax.swing.JTable tblmoviecollection;
+    private javax.swing.JTextField txtDuration;
+    private javax.swing.JTextField txtMovieTitle;
+    private javax.swing.JTextField txtPublishDate;
+    private javax.swing.JTextField txtgenre;
     // End of variables declaration//GEN-END:variables
 }

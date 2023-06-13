@@ -4,14 +4,15 @@
  */
 package ZTER;
 
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.jdi.connect.spi.Connection;
+
 /**
  *
  * @author haseena
  */
-//import javax.swing.JLabel;
+import javax.swing.JLabel;
 public class Dashboard extends javax.swing.JFrame {
-
-    private Object contentPane;
 
     /**
      * Creates new form Dashboard
@@ -19,8 +20,7 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
     }
-   
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +52,6 @@ public class Dashboard extends javax.swing.JFrame {
         Availablemovie_btn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(214783647, 2147483647));
         setName("Main frame"); // NOI18N
 
         frstpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +101,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         frstpanel.add(AvailableMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, -1));
 
-        SecMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/the-handmaiden-movie-poster 1.png"))); // NOI18N
+        SecMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/the-handmaiden-movie-poster 1.png"))); // NOI18N
         SecMovie_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SecMovie_btnActionPerformed(evt);
@@ -110,7 +109,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         frstpanel.add(SecMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 180, 270));
 
-        TrdMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/896414f828ce06accbffc54cad11ab34 1.png"))); // NOI18N
+        TrdMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/896414f828ce06accbffc54cad11ab34 1.png"))); // NOI18N
         TrdMovie_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TrdMovie_btnActionPerformed(evt);
@@ -118,27 +117,27 @@ public class Dashboard extends javax.swing.JFrame {
         });
         frstpanel.add(TrdMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 160, 210));
 
-        EghMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/Exo.png"))); // NOI18N
+        EghMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/Exo.png"))); // NOI18N
         frstpanel.add(EghMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 210, 340));
 
-        FourthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/doctor-strange-in-the-universe-of-madness-i127944 2.png"))); // NOI18N
+        FourthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/doctor-strange-in-the-universe-of-madness-i127944 2.png"))); // NOI18N
         FourthMovie_btn.setText("jButton9");
         frstpanel.add(FourthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 170, 250));
 
-        fifthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/kill-bill-vol-1-md-web 1.png"))); // NOI18N
+        fifthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/kill-bill-vol-1-md-web 1.png"))); // NOI18N
         frstpanel.add(fifthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, 160, 240));
 
-        sixthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/knives Out.png"))); // NOI18N
+        sixthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/knives Out.png"))); // NOI18N
         frstpanel.add(sixthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 160, 240));
 
-        SeventhMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/section 1.png"))); // NOI18N
+        SeventhMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/section 1.png"))); // NOI18N
         frstpanel.add(SeventhMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 200, 250));
 
-        NinethMovies_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/Hannibal 1.png"))); // NOI18N
+        NinethMovies_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/Hannibal 1.png"))); // NOI18N
         frstpanel.add(NinethMovies_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 180, 270));
 
-        TenthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/slenderman 1.png"))); // NOI18N
-        frstpanel.add(TenthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 420, 190, 290));
+        TenthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/slenderman 1.png"))); // NOI18N
+        frstpanel.add(TenthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 430, 170, 280));
 
         collectMovie_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/movie ticketing/Dashboardlessvisible.png"))); // NOI18N
         frstpanel.add(collectMovie_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1100, 620));
@@ -183,7 +182,6 @@ public class Dashboard extends javax.swing.JFrame {
     private void Profile_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Profile_btnActionPerformed
         Profile p = new Profile();
         p.setVisible(true);
-        frstpanel.getParent().remove(frstpanel);
     }//GEN-LAST:event_Profile_btnActionPerformed
 
     private void fstMovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fstMovie_btnActionPerformed
@@ -198,16 +196,11 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TrdMovie_btnActionPerformed
 
-    private void Addmovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addmovie_btnActionPerformed
-        // TODO add your handling code here:
-        AddMovies add = new AddMovies();
-        add.setVisible(true);
-    }//GEN-LAST:event_Addmovie_btnActionPerformed
-
     private void AvailableMovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvailableMovie_btnActionPerformed
         // TODO add your handling code here:
         AvailableMovies avbl = new AvailableMovies();
         avbl.setVisible(true);
+        this.hide();
     }//GEN-LAST:event_AvailableMovie_btnActionPerformed
 
     private void editstreaming_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editstreaming_btnActionPerformed
@@ -225,6 +218,14 @@ public class Dashboard extends javax.swing.JFrame {
     private void fstMovie_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fstMovie_btnMouseEntered
 
     }//GEN-LAST:event_fstMovie_btnMouseEntered
+
+    private void Addmovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addmovie_btnActionPerformed
+        // TODO add your handling code here:
+        AddMovies add = new AddMovies();
+        add.setVisible(true);
+        
+//        addMoviesList obj= new AddMovies();
+    }//GEN-LAST:event_Addmovie_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,3 +285,4 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton sixthMovie_btn;
     // End of variables declaration//GEN-END:variables
 }
+

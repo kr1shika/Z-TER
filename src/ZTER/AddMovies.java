@@ -231,7 +231,40 @@ public class AddMovies extends javax.swing.JFrame {
 
     private void img_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_img_importActionPerformed
 
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Select an image file");
     
+    // Show the file chooser dialog
+    int result = fileChooser.showOpenDialog(this);
+    
+    // Check if a file was selected
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk")) {
+            // Read the image file into a byte array
+            byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
+            
+            // Prepare the SQL statement
+            String sql = "INSERT INTO image (image) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            
+            // Set the image byte array as a parameter
+            statement.setBytes(1, imageBytes);
+            
+            // Execute the SQL statement
+            statement.executeUpdate();
+            
+            System.out.println("Image imported and stored in the database successfully.");
+            
+            // Display the image in the label
+            ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+            lblimg.setIcon(imageIcon);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     }//GEN-LAST:event_img_importActionPerformed
 

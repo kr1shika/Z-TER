@@ -13,6 +13,8 @@ package ZTERmodel;
 //import ZTERmodel.Imageicon;
 import view.*;
 import ZTERmodel.database;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,26 +46,48 @@ public class AddMovies extends javax.swing.JFrame {
     public AddMovies() {
         initComponents();
         populateTable();
+       
+        tblmoviecollection.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+    
+                int selectedRow = tblmoviecollection.getSelectedRow();
+                if (selectedRow >= 0) {
+         
+                    String movieTitle = tblmoviecollection.getValueAt(selectedRow, 0).toString();
+                    String genre = tblmoviecollection.getValueAt(selectedRow, 1).toString();
+                    String duration = tblmoviecollection.getValueAt(selectedRow, 2).toString();
+                    String publishDate = tblmoviecollection.getValueAt(selectedRow, 3).toString();
+
+  
+                    lblimg.setText(movieTitle);
+                    txtMovieTitle.setText(movieTitle);
+                    txtgenre.setText(genre);
+                    txtDuration.setText(duration);
+                    txtPublishDate.setText(publishDate);
+                }
+            }
+        });
         
         
     }
 
     private void populateTable() {
         try {
-            // Establish database connection
+   
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
 
-            // Prepare SQL statement for retrieval
+ 
             String selectSql = "SELECT * FROM movietable";
             PreparedStatement selectStatement = conn.prepareStatement(selectSql);
 
-            // Execute the retrieval query
+
             ResultSet resultSet = selectStatement.executeQuery();
 
             DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
             model.setRowCount(0);
 
-            // Process the result set and populate the table
+      
             while (resultSet.next()) {
                 Object[] rowData = {
                     resultSet.getString("MovieTitle"),
@@ -105,7 +129,7 @@ public class AddMovies extends javax.swing.JFrame {
         lblimg = new javax.swing.JLabel();
         img_import = new javax.swing.JButton();
         btninsertandview = new javax.swing.JButton();
-        btnview = new javax.swing.JButton();
+        btnupdate = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblmoviecollection = new javax.swing.JTable();
 
@@ -169,10 +193,10 @@ public class AddMovies extends javax.swing.JFrame {
             }
         });
 
-        btnview.setText("view");
-        btnview.addActionListener(new java.awt.event.ActionListener() {
+        btnupdate.setText("Update");
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnviewActionPerformed(evt);
+                btnupdateActionPerformed(evt);
             }
         });
 
@@ -205,7 +229,7 @@ public class AddMovies extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btninsertandview)
                                 .addGap(23, 23, 23)
-                                .addComponent(btnview)
+                                .addComponent(btnupdate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,8 +277,7 @@ public class AddMovies extends javax.swing.JFrame {
                             .addComponent(txtMovieTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -273,7 +296,7 @@ public class AddMovies extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnInsert)
                             .addComponent(btninsertandview)
-                            .addComponent(btnview))
+                            .addComponent(btnupdate))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
@@ -364,7 +387,7 @@ public class AddMovies extends javax.swing.JFrame {
 
     private void btninsertandviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertandviewActionPerformed
          try {
-    // Establish database connection
+   
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
 
     stmt=conn.createStatement();
@@ -374,17 +397,17 @@ public class AddMovies extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Data inserted successfully!");
     });
 
-    // Prepare SQL statement for retrieval
+   
     String selectSql = "SELECT * FROM movietable";
     PreparedStatement selectStatement = conn.prepareStatement(selectSql);
 
-    // Execute the retrieval query
+   
     ResultSet resultSet = selectStatement.executeQuery();
 
     DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
     model.setRowCount(0);
 
-    // Process the result set and populate the table
+
    while (resultSet.next()) {
     Object[] rowData = {
         resultSet.getString("MovieTitle"),
@@ -401,42 +424,47 @@ public class AddMovies extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btninsertandviewActionPerformed
 
-    private void btnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewActionPerformed
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
 
-        conn = database.dbConn();
+        int selectedRow = tblmoviecollection.getSelectedRow();
+        if (selectedRow >= 0) {
+          
+            int confirm = JOptionPane.showConfirmDialog(this, "Do you want to make changes?");
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Retrieve the updated values from the text fields
+                String updatedMovieTitle = txtMovieTitle.getText();
+                String updatedGenre = txtgenre.getText();
+                String updatedDuration = txtDuration.getText();
+                String updatedPublishDate = txtPublishDate.getText();
 
-        String query = "SELECT * FROM movietable";
+                // Update the table with the new values
+                tblmoviecollection.setValueAt(updatedMovieTitle, selectedRow, 0);
+                tblmoviecollection.setValueAt(updatedGenre, selectedRow, 1);
+                tblmoviecollection.setValueAt(updatedDuration, selectedRow, 2);
+                tblmoviecollection.setValueAt(updatedPublishDate, selectedRow, 3);
 
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(query);
+                try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
+                String updateSql = "UPDATE movietable SET MovieTitle=?, Genre=?, Duration=?, PublishDate=? WHERE MovieTitle=?";
+                PreparedStatement updateStatement = conn.prepareStatement(updateSql);
+                updateStatement.setString(1, updatedMovieTitle);
+                updateStatement.setString(2, updatedGenre);
+                updateStatement.setString(3, updatedDuration);
+                updateStatement.setString(4, updatedPublishDate);
+                updateStatement.setString(5, updatedMovieTitle); 
+                updateStatement.executeUpdate();
 
-            DefaultTableModel model = new DefaultTableModel();
-
-            ResultSetMetaData metaData = rs.getMetaData();
-
-            int columnCount = metaData.getColumnCount();
-
-            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                model.addColumn(metaData.getColumnLabel(columnIndex));
+                conn.close();
+                JOptionPane.showMessageDialog(this, "Successfully made changes");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error updating data");
             }
-
-            // Add rows to the model
-            while (rs.next()) {
-                Object[] row = new Object[columnCount];
-                for (int i = 0; i < columnCount; i++) {
-                    row[i] = rs.getObject(i + 1);
-                }
-                model.addRow(row);
-            }
-            tblmoviecollection.setModel(model);
-
-            rs.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
-
-
-    }//GEN-LAST:event_btnviewActionPerformed
+    } else {
+        JOptionPane.showMessageDialog(this, "No row selected");
+    }
+    }//GEN-LAST:event_btnupdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,7 +488,7 @@ public void Moviedetail() {
     Statement st = null;
     ResultSet rs = null;
     try {
-        conn = database.dbConn(); // Assuming dbConn() method returns a valid Connection object
+        conn = database.dbConn(); 
         st = conn.createStatement();
         rs = st.executeQuery("SELECT column1, column2, column3, column4 FROM your_table_name");
         while (rs.next()) {
@@ -469,7 +497,6 @@ public void Moviedetail() {
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(rootPane, e.getMessage());
     } finally {
-        // Close the resources in the reverse order of their creation
         try {
             if (rs != null) {
                 rs.close();
@@ -493,7 +520,7 @@ public void Moviedetail() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInsert;
     private javax.swing.JButton btninsertandview;
-    private javax.swing.JButton btnview;
+    private javax.swing.JButton btnupdate;
     private javax.swing.JButton img_import;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;

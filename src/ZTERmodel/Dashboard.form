@@ -6,8 +6,10 @@
     <Property name="name" type="java.lang.String" value="Main frame" noResource="true"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,14,0,0,4,105"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="0"/>
+    <SyntheticProperty name="generateSize" type="boolean" value="true"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -49,7 +51,7 @@
         <Component class="javax.swing.JLabel" name="lbl_Zter">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/Z-TER.png"/>
+              <Image iconType="3" name="/ZterView/Z-TER.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -61,7 +63,7 @@
         <Component class="javax.swing.JLabel" name="lbl_logo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/movie-projector 2.png"/>
+              <Image iconType="3" name="/ZterView/movie-projector 2.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -76,7 +78,7 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/icons8-user-50.png"/>
+              <Image iconType="3" name="/ZterView/Admin icon.png"/>
             </Property>
           </Properties>
           <Events>
@@ -98,6 +100,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fstMovie_btnMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fstMovie_btnMouseEntered"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fstMovie_btnActionPerformed"/>
           </Events>
@@ -136,10 +139,11 @@
         <Component class="javax.swing.JButton" name="SecMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/the-handmaiden-movie-poster 1.png"/>
+              <Image iconType="3" name="/ZterView/the-handmaiden-movie-poster 1.png"/>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SecMovie_btnMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SecMovie_btnActionPerformed"/>
           </Events>
           <Constraints>
@@ -151,24 +155,28 @@
         <Component class="javax.swing.JButton" name="TrdMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/896414f828ce06accbffc54cad11ab34 1.png"/>
+              <Image iconType="3" name="/ZterView/896414f828ce06accbffc54cad11ab34 1.png"/>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TrdMovie_btnMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TrdMovie_btnActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="500" y="170" width="160" height="210"/>
+              <AbsoluteConstraints x="490" y="170" width="160" height="210"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="EghMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/Exo.png"/>
+              <Image iconType="3" name="/ZterView/Exo.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EghMovie_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="470" y="390" width="210" height="340"/>
@@ -178,10 +186,13 @@
         <Component class="javax.swing.JButton" name="FourthMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/doctor-strange-in-the-universe-of-madness-i127944 2.png"/>
+              <Image iconType="3" name="/ZterView/doctor-strange-in-the-universe-of-madness-i127944 2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jButton9"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="FourthMovie_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="690" y="170" width="170" height="250"/>
@@ -191,9 +202,12 @@
         <Component class="javax.swing.JButton" name="fifthMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/kill-bill-vol-1-md-web 1.png"/>
+              <Image iconType="3" name="/ZterView/kill-bill-vol-1-md-web 1.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="fifthMovie_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="890" y="170" width="160" height="240"/>
@@ -203,9 +217,12 @@
         <Component class="javax.swing.JButton" name="sixthMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/knives Out.png"/>
+              <Image iconType="3" name="/ZterView/knives Out.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sixthMovie_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="50" y="420" width="160" height="240"/>
@@ -215,9 +232,12 @@
         <Component class="javax.swing.JButton" name="SeventhMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/section 1.png"/>
+              <Image iconType="3" name="/ZterView/section 1.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SeventhMovie_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="240" y="460" width="200" height="250"/>
@@ -227,9 +247,12 @@
         <Component class="javax.swing.JButton" name="NinethMovies_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/Hannibal 1.png"/>
+              <Image iconType="3" name="/ZterView/Hannibal 1.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NinethMovies_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="710" y="440" width="180" height="270"/>
@@ -239,9 +262,12 @@
         <Component class="javax.swing.JButton" name="TenthMovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/slenderman 1.png"/>
+              <Image iconType="3" name="/ZterView/slenderman 1.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TenthMovie_btnMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="910" y="430" width="170" height="280"/>
@@ -251,9 +277,12 @@
         <Component class="javax.swing.JLabel" name="collectMovie_lbl">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/Dashboardlessvisible.png"/>
+              <Image iconType="3" name="/ZterView/Dashboardlessvisible.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="collectMovie_lblMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="10" y="120" width="1100" height="620"/>
@@ -289,7 +318,7 @@
         <Component class="javax.swing.JLabel" name="Availablemovie_btn">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Zter images/movie ticketing/playing.png"/>
+              <Image iconType="3" name="/ZterView/playing.png"/>
             </Property>
           </Properties>
           <Constraints>

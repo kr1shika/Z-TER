@@ -1,13 +1,15 @@
+package view;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ZTER;
-
 /**
  *
  * @author haseena
  */
+//import ZTERmodel.Imageicon;
+import ZTERmodel.database;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,22 +21,29 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddMovies extends javax.swing.JFrame {
+
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
+
     DefaultTableModel dtm = null;
+    
 
     /**
      * Creates new form AddMovies
      */
     public AddMovies() {
         initComponents();
+        
+        
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,6 +129,11 @@ public class AddMovies extends javax.swing.JFrame {
                 "MovieTitle", "Genre", "Duration", "publishdate"
             }
         ));
+        tblmoviecollection.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblmoviecollectionMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblmoviecollection);
 
         img_import.setText("Import");
@@ -184,8 +198,10 @@ public class AddMovies extends javax.swing.JFrame {
                         .addGap(24, 24, 24)))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)))
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
@@ -234,29 +250,31 @@ public class AddMovies extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         try {
-    conn = database.dbConn();
-    stmt = conn.createStatement();
-    String sql = "INSERT INTO movietable (MovieTitle,Genre,Duration,PublishDate) VALUES ('" + txtMovieTitle.getText() + "','" + txtgenre.getText() + "','"+txtDuration.getText()+"','"+txtPublishDate.getText()+"')";
-    stmt.executeUpdate(sql);
-    System.out.println("Data inserted");
-    JOptionPane.showMessageDialog(this, "Message registered", "Teacher", JOptionPane.INFORMATION_MESSAGE);
-} catch (SQLException e) {
-    System.out.println("Error executing SQL: " + e.getMessage());
-} finally {
+            conn = database.dbConn();
+            stmt = conn.createStatement();
+            String sql = "INSERT INTO movietable (MovieTitle,Genre,Duration,PublishDate) VALUES ('" + txtMovieTitle.getText() + "','" + txtgenre.getText() + "','" + txtDuration.getText() + "','" + txtPublishDate.getText() + "')";
+            stmt.executeUpdate(sql);
+            System.out.println("Data inserted");
+            JOptionPane.showMessageDialog(this, "Message registered", "Teacher", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            System.out.println("Error executing SQL: " + e.getMessage());
+        } finally {
 
-    try {
-        if (stmt != null)
-            stmt.close();
-    } catch (SQLException e) {
-        System.out.println("Error closing statement: " + e.getMessage());
-    }
-    try {
-        if (conn != null)
-            conn.close();
-    } catch (SQLException e) {
-        System.out.println("Error closing connection: " + e.getMessage());
-    }
-}
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing statement: " + e.getMessage());
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing connection: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void txtPublishDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPublishDateActionPerformed
@@ -269,38 +287,33 @@ public class AddMovies extends javax.swing.JFrame {
 
     private void img_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_img_importActionPerformed
 
-    JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setDialogTitle("Select an image file");
-    
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select an image file");
 
-    int result = fileChooser.showOpenDialog(this);
-    
+        int result = fileChooser.showOpenDialog(this);
 
-    if (result == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk")) {
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
 
-            byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
-            
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk")) {
 
-            String sql = "INSERT INTO image (image) VALUES (?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
+                byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
 
-            statement.setBytes(1, imageBytes);
-            
+                String sql = "INSERT INTO image (image) VALUES (?)";
+                PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.executeUpdate();
-            
-            System.out.println("Image imported and stored in the database successfully.");
-            
+                statement.setBytes(1, imageBytes);
 
-            ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-            lblimg.setIcon(imageIcon);
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
+                statement.executeUpdate();
+
+                System.out.println("Image imported and stored in the database successfully.");
+
+                ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+                lblimg.setIcon(imageIcon);
+            } catch (IOException | SQLException e) {
+                e.printStackTrace();
+            }
         }
-    }
 
 
     }//GEN-LAST:event_img_importActionPerformed
@@ -314,47 +327,63 @@ public class AddMovies extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMovieTitleActionPerformed
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
-        
+
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void btnviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewActionPerformed
-        // TODO add your handling code here:
 
-        
+        conn = database.dbConn();
+
+        String query = "SELECT * FROM movietable";
+
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+
+            DefaultTableModel model = new DefaultTableModel();
+
+            ResultSetMetaData metaData = rs.getMetaData();
+
+            int columnCount = metaData.getColumnCount();
+
+            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                model.addColumn(metaData.getColumnLabel(columnIndex));
+            }
+
+            // Add rows to the model
+            while (rs.next()) {
+                Object[] row = new Object[columnCount];
+                for (int i = 0; i < columnCount; i++) {
+                    row[i] = rs.getObject(i + 1);
+                }
+                model.addRow(row);
+            }
+            tblmoviecollection.setModel(model);
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
 
     }//GEN-LAST:event_btnviewActionPerformed
+
+    private void tblmoviecollectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmoviecollectionMouseClicked
+
+
+
+    }//GEN-LAST:event_tblmoviecollectionMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddMovies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddMovies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddMovies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddMovies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+    public static void main(String args[])  {
+//     
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddMovies().setVisible(true);
+
             }
         });
     }

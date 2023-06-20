@@ -455,7 +455,15 @@ public class AddMovies extends javax.swing.JFrame {
                 updateStatement.executeUpdate();
 
                 conn.close();
-
+                JOptionPane.showMessageDialog(this, "Successfully made changes");
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error updating data");
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "No row selected");
+    }
     }//GEN-LAST:event_btnupdateActionPerformed
 
     /**

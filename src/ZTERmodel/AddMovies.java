@@ -98,7 +98,6 @@ public class AddMovies extends javax.swing.JFrame {
                 model.addRow(rowData);
             }
 
-            // Close the connection
             conn.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -226,11 +225,11 @@ public class AddMovies extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(93, Short.MAX_VALUE)
+                                .addContainerGap(104, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnInsert)
                                     .addComponent(jLabel4))
@@ -238,7 +237,7 @@ public class AddMovies extends javax.swing.JFrame {
                                 .addComponent(btninsertandview)
                                 .addGap(23, 23, 23)
                                 .addComponent(btnupdate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,10 +253,10 @@ public class AddMovies extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addGap(56, 56, 56))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(72, Short.MAX_VALUE)
-                        .addComponent(lblimg, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblimg, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(img_import)
                         .addGap(24, 24, 24)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,15 +273,11 @@ public class AddMovies extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(370, Short.MAX_VALUE)
-                                .addComponent(img_import)
-                                .addGap(32, 32, 32))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblimg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(img_import, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblimg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMovieTitle, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtMovieTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -423,7 +418,7 @@ public class AddMovies extends javax.swing.JFrame {
 
 
    while (resultSet.next()) {
-    Object[] rowData = {
+    Object[] rowData = { 
         resultSet.getString("MovieTitle"),
         resultSet.getString("Genre"),
         resultSet.getString("Duration"),
@@ -450,8 +445,7 @@ public class AddMovies extends javax.swing.JFrame {
                 String updatedGenre = txtgenre.getText();
                 String updatedDuration = txtDuration.getText();
                 String updatedPublishDate = txtPublishDate.getText();
-
-                // Update the table with the new values
+                
                 tblmoviecollection.setValueAt(updatedMovieTitle, selectedRow, 0);
                 tblmoviecollection.setValueAt(updatedGenre, selectedRow, 1);
                 tblmoviecollection.setValueAt(updatedDuration, selectedRow, 2);
@@ -481,7 +475,8 @@ public class AddMovies extends javax.swing.JFrame {
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:ear all, Warm Greetings! I hope this notice finds you in good health and high spirits. I'm excited to inform you all about an upcoming blood donation program organized at Softwarica College of IT & E-commerce by Youth Club on World Blood Donor Day. We cordially invite you to participate and contribute to this noble cause. Details of the program: Date: 14 June, Wednesday Time: 10 AM to 2 PM Venue: Block A Let's come together as a compassionate community to make a difference in the lives of others. Spread the word among your fellow students, friends and let's create a wave of kindness and generosity. We look forward to your presence at the blood donation program a
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

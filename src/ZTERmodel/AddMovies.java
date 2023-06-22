@@ -13,10 +13,17 @@ package ZTERmodel;
 //import ZTERmodel.Imageicon;
 import view.*;
 import ZTERmodel.database;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.sql.*;
 import javax.swing.ImageIcon;
@@ -26,9 +33,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+//import image.image;
 
 public class AddMovies extends javax.swing.JFrame {
 
@@ -73,36 +87,32 @@ public class AddMovies extends javax.swing.JFrame {
     }
 
     private void populateTable() {
-        try {
-   
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
+    try {
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
 
- 
-            String selectSql = "SELECT * FROM movietable";
-            PreparedStatement selectStatement = conn.prepareStatement(selectSql);
-            
+        String selectSql = "SELECT * FROM movietable";
+        PreparedStatement selectStatement = conn.prepareStatement(selectSql);
 
-            ResultSet resultSet = selectStatement.executeQuery();
+        ResultSet resultSet = selectStatement.executeQuery();
 
-            DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
-            model.setRowCount(0);
+        DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
+        model.setRowCount(0);
 
-      
-            while (resultSet.next()) {
-                Object[] rowData = {
-                    resultSet.getString("MovieTitle"),
-                    resultSet.getString("Genre"),
-                    resultSet.getString("Duration"),
-                    resultSet.getDate("PublishDate")
-                };
-                model.addRow(rowData);
-            }
-
-            conn.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        while (resultSet.next()) {
+            Object[] rowData = {
+                resultSet.getString("MovieTitle"),
+                resultSet.getString("Genre"),
+                resultSet.getString("Duration"),
+                resultSet.getDate("PublishDate")
+            };
+            model.addRow(rowData);
         }
+
+        conn.close();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
     }
+}
 
 
     /**
@@ -122,7 +132,6 @@ public class AddMovies extends javax.swing.JFrame {
         txtDuration = new javax.swing.JTextField();
         txtPublishDate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        btnInsert = new javax.swing.JButton();
         lblimg = new javax.swing.JLabel();
         img_import = new javax.swing.JButton();
         btninsertandview = new javax.swing.JButton();
@@ -165,13 +174,6 @@ public class AddMovies extends javax.swing.JFrame {
 
         jLabel4.setText("PublishDate");
 
-        btnInsert.setText("Insert");
-        btnInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertActionPerformed(evt);
-            }
-        });
-
         img_import.setText("Import");
         img_import.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +206,11 @@ public class AddMovies extends javax.swing.JFrame {
                 "Movie title", "Genre", "Duration", "Publish Date"
             }
         ));
+        tblmoviecollection.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblmoviecollectionMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblmoviecollection);
 
         jButton1.setText("jButton1");
@@ -222,10 +229,8 @@ public class AddMovies extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(104, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnInsert)
-                                    .addComponent(jLabel4))
+                                .addContainerGap(106, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btninsertandview)
                                 .addGap(23, 23, 23)
@@ -288,7 +293,6 @@ public class AddMovies extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnInsert)
                             .addComponent(btninsertandview)
                             .addComponent(btnupdate))
                         .addContainerGap())
@@ -297,35 +301,6 @@ public class AddMovies extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        try {
-            conn = database.dbConn();
-            stmt = conn.createStatement();
-            String sql = "INSERT INTO movietable (MovieTitle,Genre,Duration,PublishDate) VALUES ('" + txtMovieTitle.getText() + "','" + txtgenre.getText() + "','" + txtDuration.getText() + "','" + txtPublishDate.getText() + "')";
-            stmt.executeUpdate(sql);
-            System.out.println("Data inserted");
-            JOptionPane.showMessageDialog(this, "Message registered", "Teacher", JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException e) {
-            System.out.println("Error executing SQL: " + e.getMessage());
-        } finally {
-
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error closing statement: " + e.getMessage());
-            }
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Error closing connection: " + e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnInsertActionPerformed
 
     private void txtPublishDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPublishDateActionPerformed
         // TODO add your handling code here:
@@ -338,32 +313,33 @@ public class AddMovies extends javax.swing.JFrame {
     private void img_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_img_importActionPerformed
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select an image file");
+    fileChooser.setDialogTitle("Select an image file");
 
-        int result = fileChooser.showOpenDialog(this);
+    int result = fileChooser.showOpenDialog(this);
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
 
-            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk")) {
+            byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
 
-                byte[] imageBytes = Files.readAllBytes(selectedFile.toPath());
+            String sql = "INSERT INTO movietable (image) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setBytes(1, imageBytes);
 
-                String sql = "INSERT INTO image (image) VALUES (?)";
-                PreparedStatement statement = connection.prepareStatement(sql);
+            System.out.println("Image imported and stored in the database successfully.");
 
-                statement.setBytes(1, imageBytes);
-
-                statement.executeUpdate();
-
-                System.out.println("Image imported and stored in the database successfully.");
-
-                ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-                lblimg.setIcon(imageIcon);
-            } catch (IOException | SQLException e) {
-                e.printStackTrace();
-            }
+            ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+            Image scaledImage = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            lblimg.setIcon(new ImageIcon(scaledImage));
+            lblimg.setPreferredSize(new Dimension(200, 200));
+            lblimg.setMaximumSize(new Dimension(200, 200));
+            lblimg.setMinimumSize(new Dimension(200, 200));
+            lblimg.setHorizontalAlignment(SwingConstants.CENTER);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
         }
+    }
 
 
     }//GEN-LAST:event_img_importActionPerformed
@@ -377,71 +353,113 @@ public class AddMovies extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMovieTitleActionPerformed
 
     private void btninsertandviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertandviewActionPerformed
-         try {
-   
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
+Connection conn = database.dbConn();
+    if (conn != null) {
+        try {
+            String movieTitle = txtMovieTitle.getText();
+            String genre = txtgenre.getText();
+            String duration = txtDuration.getText();
+            String publishDate = txtPublishDate.getText();
 
-    stmt=conn.createStatement();
-    String insertSql ="INSERT INTO movietable (MovieTitle,Genre,Duration,PublishDate) VALUES ('" + txtMovieTitle.getText() + "','" + txtgenre.getText() + "','" + txtDuration.getText() + "','" + txtPublishDate.getText() + "')";
-    stmt.executeUpdate(insertSql);
-    SwingUtilities.invokeLater(() -> {
-        JOptionPane.showMessageDialog(this, "Data inserted successfully!");
-    });
+            // Retrieve the image data from the label
+            Icon icon = lblimg.getIcon();
+            if (icon instanceof ImageIcon) {
+                Image image = ((ImageIcon) icon).getImage();
+                BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = bufferedImage.createGraphics();
+                g2.drawImage(image, 0, 0, null);
+                g2.dispose();
 
-   
-    String selectSql = "SELECT * FROM movietable";
-    PreparedStatement selectStatement = conn.prepareStatement(selectSql);
+                // Convert the buffered image to bytes
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "png", baos);
+                byte[] imageBytes = baos.toByteArray();
 
-   
-    ResultSet resultSet = selectStatement.executeQuery();
+                String sql = "INSERT INTO movietable (MovieTitle, Genre, Duration, PublishDate, image) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setString(1, movieTitle);
+                statement.setString(2, genre);
+                statement.setString(3, duration);
+                statement.setString(4, publishDate);
+                statement.setBytes(5, imageBytes);
 
-    DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
-    model.setRowCount(0);
+                statement.executeUpdate();
+                System.out.println("Data inserted successfully.");
 
-
-   while (resultSet.next()) {
-    Object[] rowData = { 
-        resultSet.getString("MovieTitle"),
-        resultSet.getString("Genre"),
-        resultSet.getString("Duration"),
-        resultSet.getDate("PublishDate")
-    };
-    model.addRow(rowData);
-}
-    conn.close();
-} catch (SQLException ex) {
-    ex.printStackTrace();
-}
+                // Update 
+                // ...
+            } else {
+                System.out.println("No image selected.");
+            }
+        } catch (SQLException | IOException e) {
+            System.out.println("Error inserting data: " + e.getMessage());
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing connection: " + e.getMessage());
+            }
+        }
+    } else {
+        System.out.println("Failed to establish database connection.");
+    }
 
     }//GEN-LAST:event_btninsertandviewActionPerformed
 
+    
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+ int selectedRow = tblmoviecollection.getSelectedRow();
+    if (selectedRow >= 0) {
+        int confirm = JOptionPane.showConfirmDialog(this, "Do you want to make changes?");
+        if (confirm == JOptionPane.YES_OPTION) {
 
-        int selectedRow = tblmoviecollection.getSelectedRow();
-        if (selectedRow >= 0) {
-          
-            int confirm = JOptionPane.showConfirmDialog(this, "Do you want to make changes?");
-            if (confirm == JOptionPane.YES_OPTION) {
-                // Retrieve the updated values from the text fields
-                String updatedMovieTitle = txtMovieTitle.getText();
-                String updatedGenre = txtgenre.getText();
-                String updatedDuration = txtDuration.getText();
-                String updatedPublishDate = txtPublishDate.getText();
-                
-                tblmoviecollection.setValueAt(updatedMovieTitle, selectedRow, 0);
-                tblmoviecollection.setValueAt(updatedGenre, selectedRow, 1);
-                tblmoviecollection.setValueAt(updatedDuration, selectedRow, 2);
-                tblmoviecollection.setValueAt(updatedPublishDate, selectedRow, 3);
+            String updatedMovieTitle = txtMovieTitle.getText();
+            String updatedGenre = txtgenre.getText();
+            String updatedDuration = txtDuration.getText();
+            String updatedPublishDate = txtPublishDate.getText();
 
-                try {
+            tblmoviecollection.setValueAt(updatedMovieTitle, selectedRow, 0);
+            tblmoviecollection.setValueAt(updatedGenre, selectedRow, 1);
+            tblmoviecollection.setValueAt(updatedDuration, selectedRow, 2);
+            tblmoviecollection.setValueAt(updatedPublishDate, selectedRow, 3);
+
+            try {
                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie", "root", "0212hk");
-                String updateSql = "UPDATE movietable SET MovieTitle=?, Genre=?, Duration=?, PublishDate=? WHERE MovieTitle=?";
+                String updateSql = "UPDATE movietable SET MovieTitle=?, Genre=?, Duration=?, PublishDate=?, image=? WHERE MovieTitle=?";
                 PreparedStatement updateStatement = conn.prepareStatement(updateSql);
                 updateStatement.setString(1, updatedMovieTitle);
                 updateStatement.setString(2, updatedGenre);
                 updateStatement.setString(3, updatedDuration);
                 updateStatement.setString(4, updatedPublishDate);
-                updateStatement.setString(5, updatedMovieTitle); 
+
+           
+                Icon icon = lblimg.getIcon();
+                if (icon instanceof ImageIcon) {
+                    Image image = ((ImageIcon) icon).getImage();
+
+                
+                    BufferedImage bufferedImage = new BufferedImage(
+                            image.getWidth(null),
+                            image.getHeight(null),
+                            BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g = bufferedImage.createGraphics();
+                    g.drawImage(image, 0, 0, null);
+                    g.dispose();
+
+           
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    try {
+                        ImageIO.write(bufferedImage, "png", baos);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    byte[] imageData = baos.toByteArray();
+                    updateStatement.setBytes(5, imageData);
+                } else {
+                    updateStatement.setNull(5, Types.BLOB);
+                }
+
+                updateStatement.setString(6, updatedMovieTitle);
                 updateStatement.executeUpdate();
 
                 conn.close();
@@ -454,12 +472,17 @@ public class AddMovies extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "No row selected");
     }
+        
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:ear all, Warm Greetings! I hope this notice finds you in good health and high spirits. I'm excited to inform you all about an upcoming blood donation program organized at Softwarica College of IT & E-commerce by Youth Club on World Blood Donor Day. We cordially invite you to participate and contribute to this noble cause. Details of the program: Date: 14 June, Wednesday Time: 10 AM to 2 PM Venue: Block A Let's come together as a compassionate community to make a difference in the lives of others. Spread the word among your fellow students, friends and let's create a wave of kindness and generosity. We look forward to your presence at the blood donation program a
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblmoviecollectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmoviecollectionMouseClicked
+    
+    }//GEN-LAST:event_tblmoviecollectionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -475,45 +498,9 @@ public class AddMovies extends javax.swing.JFrame {
             }
         });
     }
-    
-public void Moviedetail() {
-    DefaultTableModel dtm = (DefaultTableModel) tblmoviecollection.getModel();
-    dtm.setRowCount(0);
-    Connection conn = null;
-    Statement st = null;
-    ResultSet rs = null;
-    try {
-        conn = database.dbConn(); 
-        st = conn.createStatement();
-        rs = st.executeQuery("SELECT column1, column2, column3, column4 FROM your_table_name");
-        while (rs.next()) {
-            dtm.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
-        }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(rootPane, e.getMessage());
-    } finally {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-}
-
-
-
-
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnInsert;
     private javax.swing.JButton btninsertandview;
     private javax.swing.JButton btnupdate;
     private javax.swing.JButton img_import;

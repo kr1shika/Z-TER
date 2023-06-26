@@ -44,7 +44,7 @@ public class Profile extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         Totalincome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblmovieprice = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -125,22 +125,17 @@ public class Profile extends javax.swing.JFrame {
         });
         jPanel1.add(Totalincome, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 250, 70));
 
-        jTable1.setBackground(new java.awt.Color(46, 74, 81));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblmovieprice.setBackground(new java.awt.Color(46, 74, 81));
+        tblmovieprice.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"021", "Your Name", "2023-02-19", "7:00", "250"},
-                {"201", "Kill Bill", "2023-03-12", "2:50", "340"},
-                {"200", "Doctor Strange", "2023-01-5", "3:00", "200"},
-                {"201", "The hand Madian ", "2023-02-13", "2:30", "300"},
-                {"230", "heather", "2023-03-13", "4:00", "550"},
-                {"235", "Ann with the E", "2023-05-12", "5:00", "200"}
+
             },
             new String [] {
-                "Ticket no", "Movie", "Date", "Show", "Fare"
+                "Ticket no", "Price", "discount"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(46, 74, 81));
-        jScrollPane1.setViewportView(jTable1);
+        tblmovieprice.setSelectionBackground(new java.awt.Color(46, 74, 81));
+        jScrollPane1.setViewportView(tblmovieprice);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 620, 150));
 
@@ -248,6 +243,6 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblmovieprice;
     // End of variables declaration//GEN-END:variables
 }

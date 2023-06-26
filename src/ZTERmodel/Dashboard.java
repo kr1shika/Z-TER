@@ -34,8 +34,10 @@ public class Dashboard extends javax.swing.JFrame {
         lbl_logo = new javax.swing.JLabel();
         Profile_btn = new javax.swing.JButton();
         fstMovie_btn = new javax.swing.JButton();
-        Addmovie_btn = new javax.swing.JButton();
-        AvailableMovie_btn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         SecMovie_btn = new javax.swing.JButton();
         TrdMovie_btn = new javax.swing.JButton();
         EghMovie_btn = new javax.swing.JButton();
@@ -46,12 +48,11 @@ public class Dashboard extends javax.swing.JFrame {
         NinethMovies_btn = new javax.swing.JButton();
         TenthMovie_btn = new javax.swing.JButton();
         collectMovie_lbl = new javax.swing.JLabel();
-        editstreaming_btn = new javax.swing.JButton();
-        customer_btn = new javax.swing.JButton();
         Availablemovie_btn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Main frame"); // NOI18N
+        getContentPane().setLayout(new java.awt.FlowLayout());
 
         frstpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,7 +69,7 @@ public class Dashboard extends javax.swing.JFrame {
                 Profile_btnActionPerformed(evt);
             }
         });
-        frstpanel.add(Profile_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, 40, 40));
+        frstpanel.add(Profile_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, 60, 60));
 
         fstMovie_btn.setIcon(new javax.swing.ImageIcon("/home/haseena/Downloads/movie ticketing/tarMOviename.png")); // NOI18N
         fstMovie_btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -85,23 +86,19 @@ public class Dashboard extends javax.swing.JFrame {
                 fstMovie_btnActionPerformed(evt);
             }
         });
-        frstpanel.add(fstMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 200, 230));
+        frstpanel.add(fstMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 230));
 
-        Addmovie_btn.setText("Add Movie");
-        Addmovie_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Addmovie_btnActionPerformed(evt);
-            }
-        });
-        frstpanel.add(Addmovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Add Movie.png"))); // NOI18N
+        frstpanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 120, 40));
 
-        AvailableMovie_btn.setText("Available Movie");
-        AvailableMovie_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AvailableMovie_btnActionPerformed(evt);
-            }
-        });
-        frstpanel.add(AvailableMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Available movies.png"))); // NOI18N
+        frstpanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 150, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Edit streaming.png"))); // NOI18N
+        frstpanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 60, 170, 30));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZTERmodel/Customer.png"))); // NOI18N
+        frstpanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 60, 100, 30));
 
         SecMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/the-handmaiden-movie-poster 1.png"))); // NOI18N
         SecMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,9 +111,9 @@ public class Dashboard extends javax.swing.JFrame {
                 SecMovie_btnActionPerformed(evt);
             }
         });
-        frstpanel.add(SecMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 180, 270));
+        frstpanel.add(SecMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 200, 230));
 
-        TrdMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/896414f828ce06accbffc54cad11ab34 1.png"))); // NOI18N
+        TrdMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Shin kamen rider 1.png"))); // NOI18N
         TrdMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TrdMovie_btnMouseClicked(evt);
@@ -127,7 +124,7 @@ public class Dashboard extends javax.swing.JFrame {
                 TrdMovie_btnActionPerformed(evt);
             }
         });
-        frstpanel.add(TrdMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 160, 210));
+        frstpanel.add(TrdMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 190, 230));
 
         EghMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Exo.png"))); // NOI18N
         EghMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +132,7 @@ public class Dashboard extends javax.swing.JFrame {
                 EghMovie_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(EghMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 210, 340));
+        frstpanel.add(EghMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 200, 280));
 
         FourthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/doctor-strange-in-the-universe-of-madness-i127944 2.png"))); // NOI18N
         FourthMovie_btn.setText("jButton9");
@@ -144,7 +141,7 @@ public class Dashboard extends javax.swing.JFrame {
                 FourthMovie_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(FourthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, 170, 250));
+        frstpanel.add(FourthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 170, 250));
 
         fifthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/kill-bill-vol-1-md-web 1.png"))); // NOI18N
         fifthMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -152,15 +149,15 @@ public class Dashboard extends javax.swing.JFrame {
                 fifthMovie_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(fifthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, 160, 240));
+        frstpanel.add(fifthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 170, 160, 240));
 
-        sixthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/knives Out.png"))); // NOI18N
+        sixthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/poster (4) 3.png"))); // NOI18N
         sixthMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sixthMovie_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(sixthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 160, 240));
+        frstpanel.add(sixthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 190, 280));
 
         SeventhMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/section 1.png"))); // NOI18N
         SeventhMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,7 +165,7 @@ public class Dashboard extends javax.swing.JFrame {
                 SeventhMovie_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(SeventhMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 200, 250));
+        frstpanel.add(SeventhMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 200, 280));
 
         NinethMovies_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Hannibal 1.png"))); // NOI18N
         NinethMovies_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -176,7 +173,7 @@ public class Dashboard extends javax.swing.JFrame {
                 NinethMovies_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(NinethMovies_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 180, 270));
+        frstpanel.add(NinethMovies_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 440, 190, 280));
 
         TenthMovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/slenderman 1.png"))); // NOI18N
         TenthMovie_btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +181,7 @@ public class Dashboard extends javax.swing.JFrame {
                 TenthMovie_btnMouseClicked(evt);
             }
         });
-        frstpanel.add(TenthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 430, 170, 280));
+        frstpanel.add(TenthMovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 440, 170, 270));
 
         collectMovie_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Dashboardlessvisible.png"))); // NOI18N
         collectMovie_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,39 +191,10 @@ public class Dashboard extends javax.swing.JFrame {
         });
         frstpanel.add(collectMovie_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 1100, 620));
 
-        editstreaming_btn.setText("Edit Streaming");
-        editstreaming_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editstreaming_btnActionPerformed(evt);
-            }
-        });
-        frstpanel.add(editstreaming_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, -1, -1));
-
-        customer_btn.setText("Customer");
-        customer_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customer_btnActionPerformed(evt);
-            }
-        });
-        frstpanel.add(customer_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 70, -1, -1));
-
         Availablemovie_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/playing.png"))); // NOI18N
         frstpanel.add(Availablemovie_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 760));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(frstpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(frstpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().add(frstpanel);
 
         setSize(new java.awt.Dimension(1129, 782));
         setLocationRelativeTo(null);
@@ -249,36 +217,9 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TrdMovie_btnActionPerformed
 
-    private void AvailableMovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvailableMovie_btnActionPerformed
-        // TODO add your handling code here:
-        AvailableMovies avbl = new AvailableMovies();
-        avbl.setVisible(true);
-        this.hide();
-    }//GEN-LAST:event_AvailableMovie_btnActionPerformed
-
-    private void editstreaming_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editstreaming_btnActionPerformed
-        // TODO add your handling code here:
-        EditStreaming edit = new EditStreaming();
-        edit.setVisible(true);
-    }//GEN-LAST:event_editstreaming_btnActionPerformed
-
-    private void customer_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customer_btnActionPerformed
-        // TODO add your handling code here:
-        Customer cust = new Customer();
-        cust.setVisible(true);
-    }//GEN-LAST:event_customer_btnActionPerformed
-
     private void fstMovie_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fstMovie_btnMouseEntered
 
     }//GEN-LAST:event_fstMovie_btnMouseEntered
-
-    private void Addmovie_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addmovie_btnActionPerformed
-        // TODO add your handling code here:
-        AddMovies add = new AddMovies();
-        add.setVisible(true);
-        
-//        addMoviesList obj= new AddMovies();
-    }//GEN-LAST:event_Addmovie_btnActionPerformed
 
     private void fstMovie_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fstMovie_btnMouseClicked
          ImageIcon icon = new ImageIcon(getClass().getResource("movie-projector 2.png"));
@@ -393,8 +334,6 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Addmovie_btn;
-    private javax.swing.JButton AvailableMovie_btn;
     private javax.swing.JLabel Availablemovie_btn;
     private javax.swing.JButton EghMovie_btn;
     private javax.swing.JButton FourthMovie_btn;
@@ -405,11 +344,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton TenthMovie_btn;
     private javax.swing.JButton TrdMovie_btn;
     private javax.swing.JLabel collectMovie_lbl;
-    private javax.swing.JButton customer_btn;
-    private javax.swing.JButton editstreaming_btn;
     private javax.swing.JButton fifthMovie_btn;
     private javax.swing.JPanel frstpanel;
     private javax.swing.JButton fstMovie_btn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lbl_Zter;
     private javax.swing.JLabel lbl_logo;
     private javax.swing.JButton sixthMovie_btn;

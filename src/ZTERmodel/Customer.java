@@ -26,21 +26,119 @@ public class Customer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        sold_tickets = new javax.swing.JTable();
+        lblshowingdate = new javax.swing.JLabel();
+        lbltitle = new javax.swing.JLabel();
+        lblratenp = new javax.swing.JLabel();
+        txt_ratenp = new javax.swing.JTextField();
+        txt_title = new javax.swing.JTextField();
+        txt_ratesp = new javax.swing.JTextField();
+        cancelbtn = new javax.swing.JButton();
+        txt_showingdate = new javax.swing.JTextField();
+        lblratesp = new javax.swing.JLabel();
+        entryllbl = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        sold_tickets.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "movieId", "title", "showing_date", "rate_sp", "rate_np"
+            }
+        ));
+        jScrollPane1.setViewportView(sold_tickets);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 110, 490, 520));
+
+        lblshowingdate.setText("showing_date");
+        jPanel1.add(lblshowingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+
+        lbltitle.setText("title");
+        jPanel1.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+
+        lblratenp.setText("rate_np");
+        jPanel1.add(lblratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
+
+        txt_ratenp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ratenpActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_ratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 150, -1));
+
+        txt_title.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_titleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 150, -1));
+
+        txt_ratesp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ratespActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_ratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 150, -1));
+
+        cancelbtn.setText("cancled");
+        cancelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
+
+        txt_showingdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_showingdateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_showingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 150, -1));
+
+        lblratesp.setText("rate_sp");
+        jPanel1.add(lblratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, -1, -1));
+
+        entryllbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/table.png"))); // NOI18N
+        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 360, 440));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/BGBG.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 800));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_ratenpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ratenpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ratenpActionPerformed
+
+    private void txt_titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_titleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_titleActionPerformed
+
+    private void txt_showingdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_showingdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_showingdateActionPerformed
+
+    private void txt_ratespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ratespActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ratespActionPerformed
+
+    private void cancelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +176,19 @@ public class Customer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelbtn;
+    private javax.swing.JLabel entryllbl;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblratenp;
+    private javax.swing.JLabel lblratesp;
+    private javax.swing.JLabel lblshowingdate;
+    private javax.swing.JLabel lbltitle;
+    private javax.swing.JTable sold_tickets;
+    private javax.swing.JTextField txt_ratenp;
+    private javax.swing.JTextField txt_ratesp;
+    private javax.swing.JTextField txt_showingdate;
+    private javax.swing.JTextField txt_title;
     // End of variables declaration//GEN-END:variables
 }

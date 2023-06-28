@@ -8,9 +8,6 @@ package ZTERmodel;
  *
  * @author haseena
  */
-//import ZTERmodel.Imageicon;
-//import view.*;
-//import ZTERmodel.database;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -30,16 +27,10 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-//import javax.swing.table.DefaultTableModel;
-//import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-//import java.sql.*;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JPanel;
-//import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
@@ -168,7 +159,7 @@ public class AddMovies extends javax.swing.JFrame {
         btnupdate = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblmoviecollection = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -296,13 +287,13 @@ public class AddMovies extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 690, 520));
 
-        jButton1.setText("delete");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btndelete.setText("delete");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btndeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 720, -1, -1));
+        getContentPane().add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 720, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Admin icon.png"))); // NOI18N
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 20, 60, 50));
@@ -545,7 +536,7 @@ DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
 
     }//GEN-LAST:event_btnupdateActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
          int selectedRow = tblmoviecollection.getSelectedRow();
     if (selectedRow >= 0) {
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this movie?");
@@ -570,7 +561,7 @@ DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
     } else {
         JOptionPane.showMessageDialog(this, "Please select a movie to delete.", "No Movie Selected", JOptionPane.WARNING_MESSAGE);
     }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btndeleteActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
@@ -603,44 +594,12 @@ DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
         });
     }
 
-    public void Moviedetail() {
-        DefaultTableModel dtm = (DefaultTableModel) tblmoviecollection.getModel();
-        dtm.setRowCount(0);
-        Connection conn = null;
-        Statement st = null;
-        ResultSet rs = null;
-        try {
-            conn = database.dbConn();
-            st = conn.createStatement();
-            rs = st.executeQuery("SELECT column1, column2, column3, column4 FROM your_table_name");
-            while (rs.next()) {
-                dtm.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btndelete;
     private javax.swing.JButton btninsertandview;
     private javax.swing.JButton btnupdate;
     private javax.swing.JButton img_import;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -664,11 +623,4 @@ DefaultTableModel model = (DefaultTableModel) tblmoviecollection.getModel();
     private javax.swing.JTextField txtgenre;
     // End of variables declaration//GEN-END:variables
 
-    private void setColor(JPanel customer_pnl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void resetColor(JPanel customer_pnl) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

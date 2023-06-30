@@ -54,9 +54,9 @@
                   <Table columnCount="5" rowCount="4">
                     <Column editable="true" title="movieId" type="java.lang.Object"/>
                     <Column editable="true" title="title" type="java.lang.Object"/>
-                    <Column editable="true" title="showing_date" type="java.lang.Object"/>
-                    <Column editable="true" title="rate_sp" type="java.lang.Object"/>
-                    <Column editable="true" title="rate_np" type="java.lang.Object"/>
+                    <Column editable="true" title="showing date" type="java.lang.Object"/>
+                    <Column editable="true" title="rate sp" type="java.lang.Object"/>
+                    <Column editable="true" title="rate np" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -92,6 +92,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sold_ticketsMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -196,7 +199,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="120" y="140" width="360" height="440"/>
+              <AbsoluteConstraints x="100" y="150" width="360" height="440"/>
             </Constraint>
           </Constraints>
         </Component>

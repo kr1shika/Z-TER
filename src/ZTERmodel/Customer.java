@@ -4,6 +4,16 @@
  */
 package ZTERmodel;
 
+import java.sql.DriverManager;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
+
+
 /**
  *
  * @author haseena
@@ -13,10 +23,56 @@ public class Customer extends javax.swing.JFrame {
     /**
      * Creates new form Customer
      */
+    private DefaultTableModel model;
+
     public Customer() {
         initComponents();
-    }
+        
+         model = new DefaultTableModel();
+    sold_tickets.setModel(model);
+    model.addColumn("movieid");
+    model.addColumn("title");
+    model.addColumn("showing Date");
+    model.addColumn("rate sP");
+    model.addColumn("rate nP");
+    
+    
+            fetchDataFromDatabase();
 
+    }
+    
+    
+    
+
+    private void fetchDataFromDatabase() {
+    try {
+
+        java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/zter", "root", "0212hk");
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT movieId, title, showing_date, rate_sp, rate_np FROM movies");
+        
+        // Clear existing rows from the table
+        model.setRowCount(0);
+        
+        // Fetch data from the result set and add it to the table
+        while (rs.next()) {
+            int movieId = rs.getInt("movieId");  
+            String title = rs.getString("title");
+            String showingDate = rs.getString("showing_date");
+            int rateSp = rs.getInt("rate_sp");
+            int rateNp = rs.getInt("rate_np");
+            
+            model.addRow(new Object[]{movieId, title, showingDate, rateSp, rateNp});
+        }
+        
+        rs.close();
+        stmt.close();
+        conn.close();
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,9 +110,14 @@ public class Customer extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "movieId", "title", "showing_date", "rate_sp", "rate_np"
+                "movieId", "title", "showing date", "rate sp", "rate np"
             }
         ));
+        sold_tickets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sold_ticketsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(sold_tickets);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 110, 490, 520));
@@ -110,7 +171,7 @@ public class Customer extends javax.swing.JFrame {
         jPanel1.add(lblratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, -1, -1));
 
         entryllbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/table.png"))); // NOI18N
-        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 360, 440));
+        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 360, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/BGBG.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 800));
@@ -137,8 +198,40 @@ public class Customer extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_ratespActionPerformed
 
     private void cancelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbtnActionPerformed
-        // TODO add your handling code here:
+         int selectedRowIndex = sold_tickets.getSelectedRow();
+    if (selectedRowIndex != -1) { // Check if a row is selected
+        int movieId = (int) sold_tickets.getValueAt(selectedRowIndex, 0);
+
+        // Delete the row from the database
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/zter", "root", "0212hk");
+            Statement stmt = conn.createStatement();
+            String query = "DELETE FROM movies WHERE movieId = " + movieId;
+            int rowsAffected = stmt.executeUpdate(query);
+            stmt.close();
+            conn.close();
+
+            if (rowsAffected > 0) {
+                // Delete the row from the table model
+                model.removeRow(selectedRowIndex);
+                JOptionPane.showMessageDialog(this, "Data canceled successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to cancel data.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     }//GEN-LAST:event_cancelbtnActionPerformed
+
+    private void sold_ticketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sold_ticketsMouseClicked
+
+        int selectedRowIndex = sold_tickets.getSelectedRow();
+    txt_title.setText(sold_tickets.getValueAt(selectedRowIndex, 1).toString());
+    txt_showingdate.setText(sold_tickets.getValueAt(selectedRowIndex, 2).toString());
+    txt_ratesp.setText(sold_tickets.getValueAt(selectedRowIndex, 3).toString());
+    txt_ratenp.setText(sold_tickets.getValueAt(selectedRowIndex, 4).toString());
+    }//GEN-LAST:event_sold_ticketsMouseClicked
 
     /**
      * @param args the command line arguments

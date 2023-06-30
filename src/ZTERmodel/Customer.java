@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 
@@ -24,6 +29,8 @@ public class Customer extends javax.swing.JFrame {
      * Creates new form Customer
      */
     private DefaultTableModel model;
+    private Timer timer;
+    private SimpleDateFormat dateFormat;
 
     public Customer() {
         initComponents();
@@ -37,12 +44,28 @@ public class Customer extends javax.swing.JFrame {
     model.addColumn("rate nP");
     
     
-            fetchDataFromDatabase();
-
+            fetchDataFromDatabase();    
+            
+    timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTextFieldWithTime();
+            }
+        });
+        timer.start();
+        
+    
+        dateFormat = new SimpleDateFormat("HH:mm:ss");
+        
+   
+        updateTextFieldWithTime();
     }
-    
-    
-    
+
+    private void updateTextFieldWithTime() {
+        Date currentTime = new Date();
+        String formattedTime = dateFormat.format(currentTime);
+        timing.setText(formattedTime);
+    }
 
     private void fetchDataFromDatabase() {
     try {
@@ -91,10 +114,13 @@ public class Customer extends javax.swing.JFrame {
         txt_ratenp = new javax.swing.JTextField();
         txt_title = new javax.swing.JTextField();
         txt_ratesp = new javax.swing.JTextField();
+        timing = new javax.swing.JTextField();
         cancelbtn = new javax.swing.JButton();
         txt_showingdate = new javax.swing.JTextField();
+        lbltiming = new javax.swing.JLabel();
         lblratesp = new javax.swing.JLabel();
         entryllbl = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,13 +130,13 @@ public class Customer extends javax.swing.JFrame {
 
         sold_tickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "movieId", "title", "showing date", "rate sp", "rate np"
+                "movieId", "title", "showing date", "rate sp", "rate np", "time checked"
             }
         ));
         sold_tickets.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,37 +146,38 @@ public class Customer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(sold_tickets);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 110, 490, 520));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 550, 570));
 
         lblshowingdate.setText("showing_date");
-        jPanel1.add(lblshowingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+        jPanel1.add(lblshowingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, -1));
 
         lbltitle.setText("title");
-        jPanel1.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+        jPanel1.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
 
         lblratenp.setText("rate_np");
-        jPanel1.add(lblratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
+        jPanel1.add(lblratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, -1, -1));
 
         txt_ratenp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_ratenpActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_ratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 150, -1));
+        jPanel1.add(txt_ratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 150, -1));
 
         txt_title.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_titleActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 150, -1));
+        jPanel1.add(txt_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 150, -1));
 
         txt_ratesp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_ratespActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_ratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, 150, -1));
+        jPanel1.add(txt_ratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 150, -1));
+        jPanel1.add(timing, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 150, 30));
 
         cancelbtn.setText("cancled");
         cancelbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -158,20 +185,26 @@ public class Customer extends javax.swing.JFrame {
                 cancelbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
+        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, -1));
 
         txt_showingdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_showingdateActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_showingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 150, -1));
+        jPanel1.add(txt_showingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 150, -1));
+
+        lbltiming.setText("Time ");
+        jPanel1.add(lbltiming, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
 
         lblratesp.setText("rate_sp");
-        jPanel1.add(lblratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, -1, -1));
+        jPanel1.add(lblratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, -1, -1));
 
         entryllbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/table.png"))); // NOI18N
-        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 360, 440));
+        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 360, 440));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Add movie.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1480, 640));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/BGBG.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 800));
@@ -179,6 +212,7 @@ public class Customer extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 800));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_ratenpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ratenpActionPerformed
@@ -272,13 +306,16 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JButton cancelbtn;
     private javax.swing.JLabel entryllbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblratenp;
     private javax.swing.JLabel lblratesp;
     private javax.swing.JLabel lblshowingdate;
+    private javax.swing.JLabel lbltiming;
     private javax.swing.JLabel lbltitle;
     private javax.swing.JTable sold_tickets;
+    private javax.swing.JTextField timing;
     private javax.swing.JTextField txt_ratenp;
     private javax.swing.JTextField txt_ratesp;
     private javax.swing.JTextField txt_showingdate;

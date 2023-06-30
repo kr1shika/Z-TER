@@ -58,7 +58,7 @@ public class Profile extends javax.swing.JFrame {
                 BackActionPerformed(evt);
             }
         });
-        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel1.add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 450, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/Admin icon.png"))); // NOI18N
@@ -149,7 +149,7 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Zter images/Desktop - 14.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/BGBG.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 750));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

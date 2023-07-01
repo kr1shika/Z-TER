@@ -37,55 +37,52 @@ public class Customer extends javax.swing.JFrame {
         
          model = new DefaultTableModel();
     sold_tickets.setModel(model);
-    model.addColumn("movieid");
-    model.addColumn("title");
-    model.addColumn("showing Date");
-    model.addColumn("rate sP");
-    model.addColumn("rate nP");
+    model.addColumn("movieId");
+    model.addColumn("receipt_id");
+    model.addColumn("total_payment");
+    model.addColumn("quantity");
     
     
             fetchDataFromDatabase();    
             
-    timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateTextFieldWithTime();
-            }
-        });
-        timer.start();
-        
-    
-        dateFormat = new SimpleDateFormat("HH:mm:ss");
-        
-   
-        updateTextFieldWithTime();
+//    timer = new Timer(1000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                updateTextFieldWithTime();
+//            }
+//        });
+//        timer.start();
+//        
+//    
+//        dateFormat = new SimpleDateFormat("HH:mm:ss");
+//        
+//   
+//        updateTextFieldWithTime();
     }
-
-    private void updateTextFieldWithTime() {
-        Date currentTime = new Date();
-        String formattedTime = dateFormat.format(currentTime);
-        timing.setText(formattedTime);
-    }
+//
+//    private void updateTextFieldWithTime() {
+//        Date currentTime = new Date();
+//        String formattedTime = dateFormat.format(currentTime);
+//        timing.setText(formattedTime);
+//    }
 
     private void fetchDataFromDatabase() {
     try {
 
         java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/zter", "root", "0212hk");
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT movieId, title, showing_date, rate_sp, rate_np FROM movies");
+        ResultSet rs = stmt.executeQuery("SELECT movieId,receipt_id,total_payment,quantity FROM purchase_tickets");
         
         // Clear existing rows from the table
         model.setRowCount(0);
-        
-        // Fetch data from the result set and add it to the table
+
         while (rs.next()) {
             int movieId = rs.getInt("movieId");  
-            String title = rs.getString("title");
-            String showingDate = rs.getString("showing_date");
-            int rateSp = rs.getInt("rate_sp");
-            int rateNp = rs.getInt("rate_np");
+            String receipt = rs.getString("receipt_id");
+            String total = rs.getString("total_payment");
+            int quantity = rs.getInt("quantity");
             
-            model.addRow(new Object[]{movieId, title, showingDate, rateSp, rateNp});
+            model.addRow(new Object[]{movieId,receipt,total,quantity});
         }
         
         rs.close();
@@ -108,17 +105,20 @@ public class Customer extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         sold_tickets = new javax.swing.JTable();
-        lblshowingdate = new javax.swing.JLabel();
-        lbltitle = new javax.swing.JLabel();
-        lblratenp = new javax.swing.JLabel();
-        txt_ratenp = new javax.swing.JTextField();
-        txt_title = new javax.swing.JTextField();
-        txt_ratesp = new javax.swing.JTextField();
-        timing = new javax.swing.JTextField();
+        total_paymentlbl = new javax.swing.JLabel();
+        receiptid_label = new javax.swing.JLabel();
+        lblmovieId = new javax.swing.JLabel();
+        txt_movieId = new javax.swing.JTextField();
+        txt_receipt = new javax.swing.JTextField();
+        txt_quantity = new javax.swing.JTextField();
         cancelbtn = new javax.swing.JButton();
-        txt_showingdate = new javax.swing.JTextField();
-        lbltiming = new javax.swing.JLabel();
-        lblratesp = new javax.swing.JLabel();
+        txt_payment = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblquantity = new javax.swing.JLabel();
         entryllbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -128,17 +128,19 @@ public class Customer extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        sold_tickets.setBackground(new java.awt.Color(46, 74, 81));
         sold_tickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "movieId", "title", "showing date", "rate sp", "rate np", "time checked"
+                "movieId", "receipt_id", "quantity", "total", "time checked"
             }
         ));
+        sold_tickets.setShowGrid(true);
         sold_tickets.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 sold_ticketsMouseClicked(evt);
@@ -146,38 +148,38 @@ public class Customer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(sold_tickets);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 550, 570));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 190, 550, 570));
 
-        lblshowingdate.setText("showing_date");
-        jPanel1.add(lblshowingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, -1));
+        total_paymentlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZTERmodel/Receipt id.png"))); // NOI18N
+        jPanel1.add(total_paymentlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, -1, -1));
 
-        lbltitle.setText("title");
-        jPanel1.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
+        receiptid_label.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        receiptid_label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZTERmodel/MOVIE TITLE_.png"))); // NOI18N
+        jPanel1.add(receiptid_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 60, 30));
 
-        lblratenp.setText("rate_np");
-        jPanel1.add(lblratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, -1, -1));
+        lblmovieId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Payment.png"))); // NOI18N
+        jPanel1.add(lblmovieId, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 80, 30));
 
-        txt_ratenp.addActionListener(new java.awt.event.ActionListener() {
+        txt_movieId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ratenpActionPerformed(evt);
+                txt_movieIdActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_ratenp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 150, -1));
+        jPanel1.add(txt_movieId, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 150, -1));
 
-        txt_title.addActionListener(new java.awt.event.ActionListener() {
+        txt_receipt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_titleActionPerformed(evt);
+                txt_receiptActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 150, -1));
+        jPanel1.add(txt_receipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 150, -1));
 
-        txt_ratesp.addActionListener(new java.awt.event.ActionListener() {
+        txt_quantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_ratespActionPerformed(evt);
+                txt_quantityActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_ratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 150, -1));
-        jPanel1.add(timing, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 150, 30));
+        jPanel1.add(txt_quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 150, -1));
 
         cancelbtn.setText("cancled");
         cancelbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -185,26 +187,58 @@ public class Customer extends javax.swing.JFrame {
                 cancelbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, -1, -1));
+        jPanel1.add(cancelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 600, -1, -1));
 
-        txt_showingdate.addActionListener(new java.awt.event.ActionListener() {
+        txt_payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_showingdateActionPerformed(evt);
+                txt_paymentActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_showingdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 150, -1));
+        jPanel1.add(txt_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 150, -1));
 
-        lbltiming.setText("Time ");
-        jPanel1.add(lbltiming, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, -1, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Rectangle 29.png"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 390, 360));
 
-        lblratesp.setText("rate_sp");
-        jPanel1.add(lblratesp, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, -1, -1));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Edit streaming.png"))); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 70, 160, 30));
 
-        entryllbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/table.png"))); // NOI18N
-        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 360, 440));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Customer.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 70, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Available movies.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+        });
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Add Movie12.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 120, 40));
+
+        lblquantity.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Quality.png"))); // NOI18N
+        jPanel1.add(lblquantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 50, -1));
+
+        entryllbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Rectangle 46.png"))); // NOI18N
+        jPanel1.add(entryllbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 490, 490));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/Add movie.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1480, 640));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 1480, 640));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ZterView/BGBG.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 800));
@@ -215,57 +249,81 @@ public class Customer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_ratenpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ratenpActionPerformed
+    private void txt_movieIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_movieIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_ratenpActionPerformed
+    }//GEN-LAST:event_txt_movieIdActionPerformed
 
-    private void txt_titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_titleActionPerformed
+    private void txt_receiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_receiptActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_titleActionPerformed
+    }//GEN-LAST:event_txt_receiptActionPerformed
 
-    private void txt_showingdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_showingdateActionPerformed
+    private void txt_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_paymentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_showingdateActionPerformed
+    }//GEN-LAST:event_txt_paymentActionPerformed
 
-    private void txt_ratespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ratespActionPerformed
+    private void txt_quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_quantityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_ratespActionPerformed
+    }//GEN-LAST:event_txt_quantityActionPerformed
 
     private void cancelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbtnActionPerformed
-         int selectedRowIndex = sold_tickets.getSelectedRow();
-    if (selectedRowIndex != -1) { // Check if a row is selected
-        int movieId = (int) sold_tickets.getValueAt(selectedRowIndex, 0);
+     int selectedRowIndex = sold_tickets.getSelectedRow();
+        if (selectedRowIndex != -1) {
+            int movieId = (int) sold_tickets.getValueAt(selectedRowIndex, 0);
 
-        // Delete the row from the database
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/zter", "root", "0212hk");
-            Statement stmt = conn.createStatement();
-            String query = "DELETE FROM movies WHERE movieId = " + movieId;
-            int rowsAffected = stmt.executeUpdate(query);
-            stmt.close();
-            conn.close();
+            // Delete the row from the database
+            try {
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/zter", "root", "0212hk");
+                Statement stmt = conn.createStatement();
+                String query = "DELETE FROM purchase_tickets WHERE movieId = " + movieId;
+                int rowsAffected = stmt.executeUpdate(query);
+                stmt.close();
+                conn.close();
 
-            if (rowsAffected > 0) {
-                // Delete the row from the table model
-                model.removeRow(selectedRowIndex);
-                JOptionPane.showMessageDialog(this, "Data canceled successfully.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to cancel data.", "Error", JOptionPane.ERROR_MESSAGE);
+                if (rowsAffected > 0) {
+                    // Delete the row from the table model
+                    model.removeRow(selectedRowIndex);
+                    JOptionPane.showMessageDialog(this, "Data canceled successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to cancel data.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(this, "No row selected.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_cancelbtnActionPerformed
 
     private void sold_ticketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sold_ticketsMouseClicked
+ int selectedRowIndex = sold_tickets.getSelectedRow();
+        if (selectedRowIndex != -1) {
+            int movieId = (int) sold_tickets.getValueAt(selectedRowIndex, 0);
+            String receipt = (String) sold_tickets.getValueAt(selectedRowIndex, 1);
+            String total = (String) sold_tickets.getValueAt(selectedRowIndex, 2);
+            int quantity = (int) sold_tickets.getValueAt(selectedRowIndex, 3);
 
-        int selectedRowIndex = sold_tickets.getSelectedRow();
-    txt_title.setText(sold_tickets.getValueAt(selectedRowIndex, 1).toString());
-    txt_showingdate.setText(sold_tickets.getValueAt(selectedRowIndex, 2).toString());
-    txt_ratesp.setText(sold_tickets.getValueAt(selectedRowIndex, 3).toString());
-    txt_ratenp.setText(sold_tickets.getValueAt(selectedRowIndex, 4).toString());
+            txt_movieId.setText(Integer.toString(movieId));
+            txt_receipt.setText(receipt);
+            txt_payment.setText(total);
+            txt_quantity.setText(Integer.toString(quantity));
+        }
     }//GEN-LAST:event_sold_ticketsMouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -306,19 +364,22 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JButton cancelbtn;
     private javax.swing.JLabel entryllbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblratenp;
-    private javax.swing.JLabel lblratesp;
-    private javax.swing.JLabel lblshowingdate;
-    private javax.swing.JLabel lbltiming;
-    private javax.swing.JLabel lbltitle;
+    private javax.swing.JLabel lblmovieId;
+    private javax.swing.JLabel lblquantity;
+    private javax.swing.JLabel receiptid_label;
     private javax.swing.JTable sold_tickets;
-    private javax.swing.JTextField timing;
-    private javax.swing.JTextField txt_ratenp;
-    private javax.swing.JTextField txt_ratesp;
-    private javax.swing.JTextField txt_showingdate;
-    private javax.swing.JTextField txt_title;
+    private javax.swing.JLabel total_paymentlbl;
+    private javax.swing.JTextField txt_movieId;
+    private javax.swing.JTextField txt_payment;
+    private javax.swing.JTextField txt_quantity;
+    private javax.swing.JTextField txt_receipt;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,81 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
-import database.DbConnection;
-import model.forgot_password_model;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import dao.ForgotPasswordDAO;
+
 import javax.swing.JOptionPane;
-/**
- *
- * @author acer
- */
+
 public class forgot_password_controller {
-    private Connection conn;
-    private Statement stmt;
+    private final ForgotPasswordDAO forgotPasswordDAO;
 
     public forgot_password_controller() {
-        conn = DbConnection.dbConnect();
+        this.forgotPasswordDAO = new ForgotPasswordDAO();
     }
-    
-public void authenticate_user(String email, String sec_1, String sec_2, String password, String confirm_password) {
-    if (!password.equals(confirm_password)) {
-        JOptionPane.showMessageDialog(null, "Passwords do not match");
-        return;
-    }
-    
-    String query = "SELECT * FROM admin WHERE email = '" + email + "'";
-    try {
-        stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        if (rs.next()) {
-            String securityQuestion1 = rs.getString("security_1");
-            String securityQuestion2 = rs.getString("security_2");
-            
-            if (securityQuestion1.equals(sec_1) && securityQuestion2.equals(sec_2)) {
-                // Update the password in the database
-                String updateQuery = "UPDATE admin SET password = '" + password + "' WHERE email = '" + email + "'";
-                stmt.executeUpdate(updateQuery);
-                
-                JOptionPane.showMessageDialog(null, "Password successfully changed");
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "answer the security quesitons correctly!");
-            }
+
+    public void authenticate_user(String email, String sec_1, String sec_2, String password, String confirm_password) {
+        if (!password.equals(confirm_password)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match");
+            return;
+        }
+
+        boolean authenticationSuccess = forgotPasswordDAO.authenticateUser(email, sec_1, sec_2, password);
+        if (authenticationSuccess) {
+            JOptionPane.showMessageDialog(null, "Password successfully changed");
         } else {
-            
+            JOptionPane.showMessageDialog(null, "Email not found or security questions not answered correctly");
+        }
+    }
+
+    public void authenticate_email(String email) {
+        boolean emailExists = forgotPasswordDAO.checkEmailExists(email);
+        if (emailExists) {
+            JOptionPane.showMessageDialog(null, "Email is registered");
+        } else {
             JOptionPane.showMessageDialog(null, "Email not found");
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
     }
-    
-
 }
-
-    public void authenticate_email(String email){
-        try {
-            String query = "SELECT email FROM admin WHERE email='" + email + "'";
-            stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            
-            if (rs.next()) {
-                // Email is registered
-                JOptionPane.showMessageDialog(null, "Email is registered");
-            } else {
-                // Email is not registered
-                JOptionPane.showMessageDialog(null, "Email not found");
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-    }  
-    }
-
-

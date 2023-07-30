@@ -52,8 +52,8 @@ public class AVMoviesDAO {
             while (rs.next()) {
                 String genre = rs.getString("genre");
                 String showingDate = rs.getString("showing_date");
-                int rateSP = rs.getInt("rate_sp");
-                int rateNP = rs.getInt("rate_np");
+                int rateSP = rs.getInt("rate_np");
+                int rateNP = rs.getInt("rate_sp");
 
                 String info = title + "," + genre + "," + showingDate + ", " + String.valueOf(rateSP) + ", " + String.valueOf(rateNP);
 

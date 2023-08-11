@@ -81,7 +81,7 @@ public class login extends javax.swing.JFrame {
 
         login_button.setBackground(new java.awt.Color(51, 51, 51));
         login_button.setForeground(new java.awt.Color(255, 255, 255));
-        login_button.setText("Log-in");
+        login_button.setText("LOG-IN");
         login_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 login_buttonActionPerformed(evt);
